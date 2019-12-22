@@ -21,6 +21,17 @@ const optionAjJobs = document.getElementById('weWorkJobs');
 const optionWeWork = document.getElementById('weWorkJobs');
 const optionLandingJobs = document.getElementById('landingJobs');
 const showResultsBtn = document.getElementById("show-results-btn");
+const menuBtn = document.getElementById('menu');
+const menuItems = document.getElementById('menu-items');
+
+menuBtn.addEventListener('click', () => {
+    if (menuItems.style.display == "block") {
+        menuItems.style.display = "none";
+    } else {
+        menuItems.style.display = "block";
+    }
+})
+
 
 let allJobs = [];
 let jobsGithub = [];
@@ -110,23 +121,32 @@ function displayGithubJobs() {
             return response.json();
         }).then((data) => {
             jobsGithub.push(...data);
-            if (!jobsGithub.length == 0) {
-                const html = jobsGithub.reduce((acc, {
-                        title,
-                        location,
-                        url,
-                        type,
-                        company,
-                        company_url,
-                        created_at,
-                        company_logo,
-                        description,
-                        how_to_apply,
-                        id
+            displayJobs();
+        }).catch(err => {
 
-                    }) =>
+            console.log(err);
+        })
+}
 
-                    acc += ` 
+
+function displayJobs() {
+    if (!jobsGithub.length == 0) {
+        const html = jobsGithub.reduce((acc, {
+                title,
+                location,
+                url,
+                type,
+                company,
+                company_url,
+                created_at,
+                company_logo,
+                description,
+                how_to_apply,
+                id
+
+            }) =>
+
+            acc += ` 
 
              <div class="job-header">
                 <img src="${company_logo ? company_logo : "images/question-sign.svg"}" class="company-logo"></img>
@@ -142,40 +162,29 @@ function displayGithubJobs() {
                         </div>
                         <hr>`, ``);
 
-                githubResult.innerHTML = html;
-                jobsGithub = [];
-                loader.style.display = "none";
-                document.querySelector('.job-filter').style.display = "block";
+        githubResult.innerHTML = html;
+        jobsGithub = [];
+        loader.style.display = "none";
+        document.querySelector('.job-filter').style.display = "block";
 
-            }
-        }).catch(err => {
-
-            console.log(err);
-        })
-}
+    }
 
 
-function displayRemoteOkJobs() {
-    fetch("https://remoteok.io/api")
-        .then((response) => {
-            return response.json();
-        }).then((data) => {
-            jobsRemoteOk.push(...data);
-            if (!jobsRemoteOk.length == 0) {
+    if (!jobsRemoteOk.length == 0) {
 
-                // Remove the first element from array
-                jobsRemoteOk.shift();
+        // Remove the first element from array
+        jobsRemoteOk.shift();
 
-                const htmlRemoteOk = jobsRemoteOk.reduce((acc, {
-                        url,
-                        company,
-                        created_at,
-                        company_logo,
-                        description,
-                        position,
-                        tags
-                    }) =>
-                    acc += ` 
+        const htmlRemoteOk = jobsRemoteOk.reduce((acc, {
+                url,
+                company,
+                created_at,
+                company_logo,
+                description,
+                position,
+                tags
+            }) =>
+            acc += ` 
 
              <div class="job-header">
                 <img src="${company_logo ? company_logo : "images/question-sign.svg"}" class="company-logo"></img>
@@ -194,12 +203,21 @@ function displayRemoteOkJobs() {
                         <hr>`, ``);
 
 
-                resultRemoteOk.innerHTML = htmlRemoteOk;
-                jobsRemoteOk = [];
-                loader.style.display = "none";
-                document.querySelector('.job-filter').style.display = "block";
+        resultRemoteOk.innerHTML = htmlRemoteOk;
+        jobsRemoteOk = [];
+        loader.style.display = "none";
+        document.querySelector('.job-filter').style.display = "block";
 
-            }
+    }
+}
+
+
+function displayRemoteOkJobs() {
+    fetch("https://remoteok.io/api")
+        .then((response) => {
+            return response.json();
+        }).then((data) => {
+            jobsRemoteOk.push(...data);
         }).catch(err => {
             console.log(err);
         })
