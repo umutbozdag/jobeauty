@@ -30,7 +30,9 @@ menuBtn.addEventListener('click', () => {
     } else {
         menuItems.style.display = "block";
     }
-})
+});
+
+
 
 
 let allJobs = [];
@@ -44,62 +46,6 @@ let jobsLanding = [];
 // Display all the jobs when the window is loaded
 window.addEventListener('load', displayAllJobs);
 
-
-
-showResultsBtn.addEventListener('click', () => {
-    if (optionAllJobs.selected) {
-        displayAllJobs();
-    } else if (optionGithubJobs.selected) {
-        displayGithubJobs();
-    } else if (optionRemoteOk.selected) {
-        displayRemoteOkJobs();
-    } else if (optionCodepenJobs.selected) {
-        displayCodepenJobs();
-    } else if (optionWeWork.selected) {
-        displayWeWorkJobs();
-    } else if (optionLandingJobs.selected) {
-        displayLandingJobs();
-    }
-})
-
-// // getData("https://www.weworkmeteor.com/api/jobs", jobsWeWork);
-
-// let a, b, c, d, e;
-// Promise.all([
-//         fetch('https://github-jobs-proxy.appspot.com/positions?description=&location='),
-//         fetch('https://www.weworkmeteor.com/api/jobs'),
-//         fetch("https://remoteok.io/api"),
-//         fetch("https://cors-anywhere.herokuapp.com/https://authenticjobs.com/api/?api_key=986ed32d86ee52b3526699807b65fd75&method=aj.jobs.search&format=json&perpage=100"),
-//         fetch("https://codepen.io/jobs.json")
-//     ]).then(async ([github, wework, remoteok, aj, codepen]) => {
-//         a = await github.json();
-//         b = await wework.json();
-//         c = await remoteok.json();
-//         d = await aj.json();
-//         e = await codepen.json();
-
-
-//         return [a, b, c, d, e];
-//     })
-//     .then((data) => {
-//         console.log(data)
-//         allJobs.push(...data);
-//         jobsGithub.push(...a);
-//         jobsWeWork.push(b);
-//         jobsRemoteOk.push(...c);
-//         jobsAJ.push(d);
-//         jobsCodepen.push(e);
-//         var merged = [].concat.apply([], allJobs);
-
-//          console.log(merged);
-//         // console.log(allJobs);
-//     }).catch((err) => {
-//         console.log(err);
-
-//     });
-
-
-
 function displayAllJobs() {
 
     displayGithubJobs();
@@ -110,9 +56,11 @@ function displayAllJobs() {
 
     // displayCodepenJobs();
 
-    displayAjJobs();
+    // displayAjJobs();
 
-    displayLandingJobs();
+    // displayLandingJobs();
+    jobsGithub = [];
+    jobsRemoteOk = [];
 }
 
 function displayGithubJobs() {
@@ -122,8 +70,9 @@ function displayGithubJobs() {
         }).then((data) => {
             jobsGithub.push(...data);
             displayJobs();
+            jobsGithub = [];
+            jobsRemoteOk = [];
         }).catch(err => {
-
             console.log(err);
         })
 }
@@ -149,7 +98,7 @@ function displayJobs() {
             acc += ` 
 
              <div class="job-header">
-                <img src="${company_logo ? company_logo : "images/question-sign.svg"}" class="company-logo"></img>
+                <img class="company-logo" src="${company_logo ? company_logo : "images/question-sign.svg"}" ></img>
                             <div class="job-header-2">
                                 <a href="${url}" target="_blank" class="job-title">${title}</a>
                                 <a href="${company_url}" target="_blank" class="job-company">${company}</a>
@@ -164,6 +113,7 @@ function displayJobs() {
 
         githubResult.innerHTML = html;
         jobsGithub = [];
+        jobsRemoteOk = [];
         loader.style.display = "none";
         document.querySelector('.job-filter').style.display = "block";
 
@@ -205,9 +155,9 @@ function displayJobs() {
 
         resultRemoteOk.innerHTML = htmlRemoteOk;
         jobsRemoteOk = [];
+        jobsGithub = [];
         loader.style.display = "none";
         document.querySelector('.job-filter').style.display = "block";
-
     }
 }
 
@@ -218,255 +168,300 @@ function displayRemoteOkJobs() {
             return response.json();
         }).then((data) => {
             jobsRemoteOk.push(...data);
+            displayJobs();
+            jobsGithub = [];
+            jobsRemoteOk = [];
         }).catch(err => {
             console.log(err);
         })
-
 }
-
-function displayWeWorkJobs() {
-    fetch("https://www.weworkmeteor.com/api/jobs")
-        .then((response) => {
-            return response.json();
-        }).then((data) => {
-            jobsWeWork.push(data);
-            console.log(jobsWeWork);
-        }).catch(err => {
-
-            console.log(err);
-        })
-
-    // if (!jobsWeWork.length == 0) {
-
-    //     // Remove the first element from array
-    //     let acc;
-    //     const htmlWeWork = jobsWeWork.map(jobWeWork => {
-    //         return acc += ` 
-
-    //          <div class="job-header">
-    //             <img src="${jobWeWork.data.company_logo ? jobWeWork.data.company_logo : "images/question-sign.svg"}" class="company-logo"></img>
-    //                         <div class="job-header-2">
-    //                             <a href="${jobWeWork.data.map(element => {
-    //                               return element.siteUrl;  
-    //                             })}" target="_blank" class="job-title">${jobWeWork.data.map(element => {
-    //                                 return element.title;
-    //                             })}</a>
-    //                             <a target="_blank" class="job-company">${jobWeWork.data.map(element => {
-    //                                 return element.company;
-    //                             })}</a>
-    //                         </div>
-    //                     </div>
-    //                     <p class="job-desc"></p>
-    //                     <div class="job-tags">
-    //                         <p class="job-location"><i class="fas fa-map-marker-alt"></i>${jobWeWork.data.map(element => {
-    //                             return element.location;
-    //                         })}</p>
-    //                          <p class="job-type"><i class="fas fa-suitcase-rolling"></i>${jobWeWork.data.map(element => {
-    //                             return element.jobtype;
-    //                         })}</p>
-    //                     </div>
-    //                     <hr>`;
-    //     }).join('');
-
-    //     acc = ``;
-
-
-    //     resultWeWork.innerHTML = htmlWeWork;
-    //     jobsWeWork = [];
-    //     loader.style.display = "none";
-    //     document.querySelector('.job-filter').style.display = "block";
-
-    // }
-
-
-    if (!jobsWeWork.length == 0) {
-        const htmlWeWork = jobsWeWork.reduce((acc, {
-                data
-            }) =>
-
-            acc += ` 
-
-             <div class="job-header">
-                <img src="${data.company_logo ? data.company_logo : "images/question-sign.svg"}" class="company-logo"></img>
-                            <div class="job-header-2">
-                                <a href="${data.map(element => {
-                                    return element.siteUrl;
-                                })}" target="_blank" class="job-title">${data.map(element => {
-                                    return element.title[0];
-                                })}</a>
-                                <a target="_blank" class="job-company">${data.company ? data.company : "No Company Info"}</a>
-                            </div>
-                        </div>
-                        <p class="job-desc"></p>
-                        <div class="job-tags">
-                            <p class="job-location"><i class="fas fa-tags"></i>${data.map(element => {
-                                return element.location;
-                            })}</p>
-                            
-                        </div>
-                        <hr>`, ``);
-
-
-        resultWeWork.innerHTML = htmlWeWork;
-        jobsRemoteOk = [];
-        loader.style.display = "none";
-        document.querySelector('.job-filter').style.display = "block";
-
-    }
-}
-
-function displayCodepenJobs() {
-    fetch("https://codepen.io/jobs.json")
-        .then((response) => {
-            return response.json();
-        }).then((data) => {
-            jobsCodepen.push(data);
-            console.log(data);
-        }).catch(err => {
-            console.log(err);
-        })
-
-
-    if (!jobsCodepen.length == 0) {
-
-
-        // const htmlCodepen = jobsCodepen.reduce((acc, {
-        //         jobs
-        //     }) =>
-        //     acc += ` 
-
-        //      <div class="job-header">
-        //         <img src="${jobs.company_logo ? jobs.company_logo : "images/question-sign.svg"}" class="company-logo"></img>
-        //                     <div class="job-header-2">
-        //                         <a href="${jobs.map(job => {
-        //                             return job.url;
-        //                         })}" target="_blank" class="job-title">${jobs.map(job => {
-        //                             return job.title;
-        //                         }).join(' BOŞLUk')}</a>
-        //                         <a target="_blank" class="job-company">${jobs.company_name ? jobs.company_name : "No Company Info"}</a>
-        //                     </div>
-        //                 </div>
-        //                 <p class="job-desc"></p>
-        //                 <div class="job-tags">
-        //                     <p class="job-location"><i class="fas fa-tags"></i>${jobs.location}</p>
-
-        //                 </div>
-        //                 <hr>`, ``);
-
-
-        // resultCodepen.innerHTML = htmlCodepen;
-        // jobsCodepen = [];
-        // loader.style.display = "none";
-        // document.querySelector('.job-filter').style.display = "block";
-
-    }
-}
-
-
-function displayAjJobs() {
-    // fetch("https://cors-anywhere.herokuapp.com/https://authenticjobs.com/api/?api_key=986ed32d86ee52b3526699807b65fd75&method=aj.jobs.search&format=json&perpage=100")
-    //     .then((response) => {
-    //         return response.json();
-    //     }).then((data) => {
-    //         //displayJobs();
-    //         //jobsGithub = [];
-    //         // jobsRemoteOk = [];
-    //         console.log(data);
-    //     }).catch(err => {
-    //         console.log(err);
-    //     })
-}
-
-
-function displayLandingJobs() {
-    fetch("https://landing.jobs/api/v1/jobs.json")
-        .then((response) => {
-            return response.json();
-        }).then((data) => {
-            jobsLanding.push(...data);
-            // console.log(data);
-
-            if (!jobsLanding.length == 0) {
-                const htmlLandingJobs = jobsLanding.reduce((acc, {
-                        company_logo,
-                        city,
-                        title,
-                        tags,
-                        type,
-                        url,
-                        company_id,
-                        logo_url
-                    }) =>
-
-
-                    acc += ` 
-
-             <div class="job-header">
-                <img src="${company_logo ? company_logo : "images/question-sign.svg"}" class="company-logo"></img>
-                            <div class="job-header-2">
-                                <a href="${url}" target="_blank" class="job-title">${title}</a>
-                                <a target="_blank" class="job-company">${getData(company_id)}</a>
-                            </div>
-                        </div>
-                        <p class="job-desc"></p>
-                        <div class="job-tags">
-                            <p class="job-location"><i class="fas fa-tags"></i>${tags.map(tag => {
-                                return tag.toUpperCase();
-                            }).join(', ')}</p>
-                            
-                        </div>
-                        <hr>`, ``);
-
-
-                resultLandingJobs.innerHTML = htmlLandingJobs;
-                jobsLanding = [];
-                loader.style.display = "none";
-                document.querySelector('.job-filter').style.display = "block";
-            }
-        }).catch(err => {
-            console.log(err);
-        });
-
-
-    // async function getCompany(company_id) {
-    //     let response = await fetch(`https://landing.jobs/api/v1/companies/${company_id}`);
-    //     let data = await response.json();
-    //     companies.push(data);
-    //     console.log(data);
-    // }
-
-
-}
-let companies = [];
-let company_name = "";
-
-function getData(company_id) {
-    fetch(`https://landing.jobs/api/v1/companies/${company_id}`)
-        .then((response) => {
-            return response.json();
-        }).then((data) => {
-            companies.push(data);
-            companies.map((company) => company.name);
-        }).catch(err => {
-            console.log(err);
-        });
-}
-
-
-
 
 buttonSearch.addEventListener("click", () => {
-    fetch(`https://github-jobs-proxy.appspot.com/positions?description=${inputDetail.value ? inputDetail.value : ''}&location=${inputLocation.value ? inputLocation.value : ''}`)
-        .then((response) => {
-            return response.json();
-        }).then((data) => {
-            jobsGithub.push(...data);
-            console.table(jobsGithub);
-            loader.style.display = "block";
-            displayJobs();
-        })
-    inputDetail.value = '';
-    inputLocation.value = '';
-    jobsGithub = [];
-    jobsRemoteOk = [];
+    if (inputDetail.value != '' || inputLocation.value != '') {
+        fetch(`https://github-jobs-proxy.appspot.com/positions?description=${inputDetail.value ? inputDetail.value : ''}&location=${inputLocation.value ? inputLocation.value : ''}`)
+            .then((response) => {
+                return response.json();
+            }).then((data) => {
+                jobsGithub.push(...data);
+                console.table(jobsGithub);
+                displayJobs();
+            })
+        inputDetail.value = '';
+        inputLocation.value = '';
+        jobsGithub = [];
+        jobsRemoteOk = [];
+    } else {
+        alert("Please enter some information!");
+    }
+
 });
+
+inputDetail.addEventListener('keyup', (e) => {
+    if (e.keyCode == 13) {
+        if (inputDetail.value != '' || inputLocation.value != '') {
+            fetch(`https://github-jobs-proxy.appspot.com/positions?description=${inputDetail.value ? inputDetail.value : ''}&location=${inputLocation.value ? inputLocation.value : ''}`)
+                .then((response) => {
+                    return response.json();
+                }).then((data) => {
+                    jobsGithub.push(...data);
+                    console.table(jobsGithub);
+                    displayJobs();
+                })
+            inputDetail.value = '';
+            inputLocation.value = '';
+            jobsGithub = [];
+            jobsRemoteOk = [];
+        } else {
+            alert("Enter some information");
+        }
+    }
+});
+
+inputLocation.addEventListener('keyup', (e) => {
+    if (e.keyCode == 13) {
+        if (inputDetail.value != '' || inputLocation.value != '') {
+            fetch(`https://github-jobs-proxy.appspot.com/positions?description=${inputDetail.value ? inputDetail.value : ''}&location=${inputLocation.value ? inputLocation.value : ''}`)
+                .then((response) => {
+                    return response.json();
+                }).then((data) => {
+                    jobsGithub.push(...data);
+                    console.table(jobsGithub);
+                    displayJobs();
+                })
+            inputDetail.value = '';
+            inputLocation.value = '';
+            jobsGithub = [];
+            jobsRemoteOk = [];
+        } else {
+            alert("Enter some information");
+        }
+    }
+});
+
+// function displayWeWorkJobs() {
+//     fetch("https://www.weworkmeteor.com/api/jobs")
+//         .then((response) => {
+//             return response.json();
+//         }).then((data) => {
+//             jobsWeWork.push(data);
+//             console.log(jobsWeWork);
+//         }).catch(err => {
+
+//             console.log(err);
+//         })
+
+//     // if (!jobsWeWork.length == 0) {
+
+//     //     // Remove the first element from array
+//     //     let acc;
+//     //     const htmlWeWork = jobsWeWork.map(jobWeWork => {
+//     //         return acc += ` 
+
+//     //          <div class="job-header">
+//     //             <img src="${jobWeWork.data.company_logo ? jobWeWork.data.company_logo : "images/question-sign.svg"}" class="company-logo"></img>
+//     //                         <div class="job-header-2">
+//     //                             <a href="${jobWeWork.data.map(element => {
+//     //                               return element.siteUrl;  
+//     //                             })}" target="_blank" class="job-title">${jobWeWork.data.map(element => {
+//     //                                 return element.title;
+//     //                             })}</a>
+//     //                             <a target="_blank" class="job-company">${jobWeWork.data.map(element => {
+//     //                                 return element.company;
+//     //                             })}</a>
+//     //                         </div>
+//     //                     </div>
+//     //                     <p class="job-desc"></p>
+//     //                     <div class="job-tags">
+//     //                         <p class="job-location"><i class="fas fa-map-marker-alt"></i>${jobWeWork.data.map(element => {
+//     //                             return element.location;
+//     //                         })}</p>
+//     //                          <p class="job-type"><i class="fas fa-suitcase-rolling"></i>${jobWeWork.data.map(element => {
+//     //                             return element.jobtype;
+//     //                         })}</p>
+//     //                     </div>
+//     //                     <hr>`;
+//     //     }).join('');
+
+//     //     acc = ``;
+
+
+//     //     resultWeWork.innerHTML = htmlWeWork;
+//     //     jobsWeWork = [];
+//     //     loader.style.display = "none";
+//     //     document.querySelector('.job-filter').style.display = "block";
+
+//     // }
+
+
+//     if (!jobsWeWork.length == 0) {
+//         const htmlWeWork = jobsWeWork.reduce((acc, {
+//                 data
+//             }) =>
+
+//             acc += ` 
+
+//              <div class="job-header">
+//                 <img src="${data.company_logo ? data.company_logo : "images/question-sign.svg"}" class="company-logo"></img>
+//                             <div class="job-header-2">
+//                                 <a href="${data.map(element => {
+//                                     return element.siteUrl;
+//                                 })}" target="_blank" class="job-title">${data.map(element => {
+//                                     return element.title[0];
+//                                 })}</a>
+//                                 <a target="_blank" class="job-company">${data.company ? data.company : "No Company Info"}</a>
+//                             </div>
+//                         </div>
+//                         <p class="job-desc"></p>
+//                         <div class="job-tags">
+//                             <p class="job-location"><i class="fas fa-tags"></i>${data.map(element => {
+//                                 return element.location;
+//                             })}</p>
+
+//                         </div>
+//                         <hr>`, ``);
+
+
+//         resultWeWork.innerHTML = htmlWeWork;
+//         jobsRemoteOk = [];
+//         loader.style.display = "none";
+//         document.querySelector('.job-filter').style.display = "block";
+
+//     }
+// }
+
+// function displayCodepenJobs() {
+//     fetch("https://codepen.io/jobs.json")
+//         .then((response) => {
+//             return response.json();
+//         }).then((data) => {
+//             jobsCodepen.push(data);
+//             console.log(data);
+//         }).catch(err => {
+//             console.log(err);
+//         })
+
+
+//     if (!jobsCodepen.length == 0) {
+
+
+//         // const htmlCodepen = jobsCodepen.reduce((acc, {
+//         //         jobs
+//         //     }) =>
+//         //     acc += ` 
+
+//         //      <div class="job-header">
+//         //         <img src="${jobs.company_logo ? jobs.company_logo : "images/question-sign.svg"}" class="company-logo"></img>
+//         //                     <div class="job-header-2">
+//         //                         <a href="${jobs.map(job => {
+//         //                             return job.url;
+//         //                         })}" target="_blank" class="job-title">${jobs.map(job => {
+//         //                             return job.title;
+//         //                         }).join(' BOŞLUk')}</a>
+//         //                         <a target="_blank" class="job-company">${jobs.company_name ? jobs.company_name : "No Company Info"}</a>
+//         //                     </div>
+//         //                 </div>
+//         //                 <p class="job-desc"></p>
+//         //                 <div class="job-tags">
+//         //                     <p class="job-location"><i class="fas fa-tags"></i>${jobs.location}</p>
+
+//         //                 </div>
+//         //                 <hr>`, ``);
+
+
+//         // resultCodepen.innerHTML = htmlCodepen;
+//         // jobsCodepen = [];
+//         // loader.style.display = "none";
+//         // document.querySelector('.job-filter').style.display = "block";
+
+//     }
+// }
+
+
+// function displayAjJobs() {
+//     // fetch("https://cors-anywhere.herokuapp.com/https://authenticjobs.com/api/?api_key=986ed32d86ee52b3526699807b65fd75&method=aj.jobs.search&format=json&perpage=100")
+//     //     .then((response) => {
+//     //         return response.json();
+//     //     }).then((data) => {
+//     //         //displayJobs();
+//     //         //jobsGithub = [];
+//     //         // jobsRemoteOk = [];
+//     //         console.log(data);
+//     //     }).catch(err => {
+//     //         console.log(err);
+//     //     })
+// }
+
+
+// function displayLandingJobs() {
+//     fetch("https://landing.jobs/api/v1/jobs.json")
+//         .then((response) => {
+//             return response.json();
+//         }).then((data) => {
+//             jobsLanding.push(...data);
+//             // console.log(data);
+
+//             if (!jobsLanding.length == 0) {
+//                 const htmlLandingJobs = jobsLanding.reduce((acc, {
+//                         company_logo,
+//                         city,
+//                         title,
+//                         tags,
+//                         type,
+//                         url,
+//                         company_id,
+//                         logo_url
+//                     }) =>
+
+
+//                     acc += ` 
+
+//              <div class="job-header">
+//                 <img src="${company_logo ? company_logo : "images/question-sign.svg"}" class="company-logo"></img>
+//                             <div class="job-header-2">
+//                                 <a href="${url}" target="_blank" class="job-title">${title}</a>
+//                                 <a target="_blank" class="job-company">${getData(company_id)}</a>
+//                             </div>
+//                         </div>
+//                         <p class="job-desc"></p>
+//                         <div class="job-tags">
+//                             <p class="job-location"><i class="fas fa-tags"></i>${tags.map(tag => {
+//                                 return tag.toUpperCase();
+//                             }).join(', ')}</p>
+
+//                         </div>
+//                         <hr>`, ``);
+
+
+//                 resultLandingJobs.innerHTML = htmlLandingJobs;
+//                 jobsLanding = [];
+//                 loader.style.display = "none";
+//                 document.querySelector('.job-filter').style.display = "block";
+//             }
+//         }).catch(err => {
+//             console.log(err);
+//         });
+
+
+//     // async function getCompany(company_id) {
+//     //     let response = await fetch(`https://landing.jobs/api/v1/companies/${company_id}`);
+//     //     let data = await response.json();
+//     //     companies.push(data);
+//     //     console.log(data);
+//     // }
+
+
+// }
+// let companies = [];
+// let company_name = "";
+
+// function getData(company_id) {
+//     fetch(`https://landing.jobs/api/v1/companies/${company_id}`)
+//         .then((response) => {
+//             return response.json();
+//         }).then((data) => {
+//             companies.push(data);
+//             companies.map((company) => company.name);
+//         }).catch(err => {
+//             console.log(err);
+//         });
+// }

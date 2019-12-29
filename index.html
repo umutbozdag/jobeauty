@@ -7,108 +7,58 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Software Jobs</title>
     <link rel="stylesheet" href="style.css" type="text/css">
-    <script src="app.js" type="module" async></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 </head>
 
 <body>
-    <!-- Nav -->
-    <nav id="navbar">
-        <div class="container">
-            <div class="row">
-                <div class="left">
-                    <p>Logo</p>
-                </div>
-                <div class="right">
-                    <a href="#">See all the jobs!</a>
-                    <a href="#">About</a>
-                </div>
+    <div class="main-container">
 
-            </div>
-        </div>
-    </nav>
-
-    <header>
-        <div class="container">
-            <div class="row">
-                <div class="left"><img class="header-img" src="images/header.svg" alt=""></div>
-                <div class="right">
-                    <p>
-                        Find the best job for yourself and get hired!
-                    </p>
-                </div>
-            </div>
-
-
-            <div id="menu" class="menu"><i class="fas fa-bars"></i></div>
-
-            <ul id="menu-items" class="menu-items">
-                <li><a href="#">See all the jobs!</a> </li>
-                <li><a href="#">About</a></li>
-            </ul>
-
-
-            <div class="select-section">
-                <select name="select" id="select">
-                    <option id="allJobs" value="all-jobs">All jobs</option>
-                    <option id="githubJobs" value="github-jobs">Github Jobs</option>
-                    <option id="remoteOk" value="remote-ok">Remote Ok Jobs</option>
-                    <option id="codepenJobs" value="codepen-jobs">Codepen Jobs</option>
-                    <option id="ajJobs" value=aj-jobs"">Authentic Jobs</option>
-                    <option id="weWorkJobs" value="we-work-jobs">We Work Meteor Jobs</option>
-                    <option id="landingJobs" value="landing-jobs">Landing Jobs</option>
-                </select>
-                <button id="show-results-btn">See results</button>
-            </div>
-
-        </div>
-
-    </header>
-
-
-    <div class="latest-jobs">
-        <h1>Latest Jobs</h1>
-        <div class="line"></div>
-    </div>
-
-    <!-- Jobs listing section -->
-
-    <section id="home-jobs">
-
-        <div class="container">
-
-            <div class="loader">Loading...</div>
-            <div class="row">
-                <div class="column column-1">
-                    <div class="job-list">
-
-                        <div id="resultGithub"></div>
-                        <div id="resultRemoteOk"></div>
-                        <div id="resultCodepen"></div>
-                        <div id="resultAJ"></div>
-                        <div id="resultWeWork"></div>
-                        <div id="resultLandingJobs"></div>
+        <!-- Nav -->
+        <nav id="navbar">
+            <div class="container">
+                <div class="row">
+                    <div class="left">
+                        <a href="./index.html">jobeauty</a>
                     </div>
+                    <div class="right">
+                        <a href="./latest-jobs.html">latest jobs</a>
+                        <a href="./about.html">about</a>
+
+                    </div>
+
                 </div>
-                <div class="column column-2">
-                    <div class="job-filter">
-                        <div class="filter-card">
-                            <p class="">Keyword</p>
-                            <input id="inputDetail" class="input" placeholder="Enter Keyword..." type="text">
+            </div>
+        </nav>
 
-                            <p>Location</p>
-                            <input id="inputLocation" class="input" placeholder="Enter Location..." type="text">
-
-                            <p>Job Type</p>
-                            <label> <input class="job-type-checkbox input" type="checkbox">Full Time</label>
-
+        <header>
+            <div class="container">
+                <div class="row">
+                    <div class="left">
+                        <div class="content">
+                            <h1>Jobeauty</h1>
+                            <p>
+                                Find the best job for yourself and get hired!
+                            </p>
+                            <div class="btn-container">
+                                <a class="latest-jobs-btn" href="./latest-jobs.html">See the latest jobs <i
+                                        class="fas fa-arrow-right"></i></a>
+                            </div>
                         </div>
-                        <button id="buttonSearch" class="filter-search">Search</button>
+                    </div>
+
+                    <div class="right">
+                        <img class="header-img" width="400" src="images/header.png" alt="">
                     </div>
                 </div>
+                <div id="menu" class="menu"><i class="fas fa-bars"></i></div>
+
+                <ul id="menu-items" class="menu-items">
+                    <li><a href="">See all the jobs!</a> </li>
+                    <li><a class="about" href="#">About</a></li>
+                </ul>
             </div>
-        </div>
-    </section>
+        </header>
+    </div>
 
 </body>
 

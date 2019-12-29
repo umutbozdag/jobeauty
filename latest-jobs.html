@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="latest-jobs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
+    <script src="app.js" async></script>
+</head>
+
+<body>
+
+    <!-- Nav -->
+    <nav id="navbar">
+        <div class="container">
+            <div class="row">
+                <div class="left">
+                    <a href="./index.html">jobeauty</a>
+                </div>
+                <div class="right">
+                    <a href="./latest-jobs.html">latest jobs</a>
+                    <a href="./about.html">about</a>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="latest-jobs">
+        <h1>Latest Jobs</h1>
+        <div class="line"></div>
+    </div>
+
+    <!-- Jobs listing section -->
+
+    <section id="home-jobs">
+
+        <div class="container">
+
+            <div class="loader">Loading...</div>
+            <div class="row">
+                <div class="column column-1">
+                    <div class="job-list">
+
+                        <div id="resultGithub"></div>
+                        <div id="resultRemoteOk"></div>
+                        <div id="resultCodepen"></div>
+                        <div id="resultAJ"></div>
+                        <div id="resultWeWork"></div>
+                        <div id="resultLandingJobs"></div>
+                    </div>
+                </div>
+                <div class="column column-2">
+                    <div class="job-filter">
+                        <div class="filter-card">
+                            <p class="">Keyword</p>
+                            <input id="inputDetail" class="input" placeholder="Enter Keyword..." type="text">
+
+                            <p>Location</p>
+                            <input id="inputLocation" class="input" placeholder="Enter Location..." type="text">
+
+                            <p>Job Type</p>
+                            <label> <input class="job-type-checkbox input" type="checkbox">Full Time</label>
+
+                        </div>
+                        <button id="buttonSearch" class="filter-search">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="menu" class="menu"><i class="fas fa-bars"></i></div>
+
+    <ul id="menu-items" class="menu-items">
+        <li><a href="">See all the jobs!</a> </li>
+        <li><a class="about" href="#">About</a></li>
+    </ul>
+</body>
+
+</html>
