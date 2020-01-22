@@ -5,9 +5,9 @@
   "main": "gulpfile.js",
   "dependencies": {
     "browser-sync": "^2.26.7",
-    "gulp-sass": "^4.0.2",
     "gulp": "^4.0.2",
-    "node-sass": "^4.13.0"
+    "gulp-sass": "^4.0.2",
+    "node-sass": "^4.13.1"
   },
   "devDependencies": {},
   "scripts": {
