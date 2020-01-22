@@ -68,7 +68,7 @@ function displayJobs() {
             acc += ` 
 
              <div class="job-header">
-                <img class="company-logo" src="${company_logo ? company_logo : "/images/question-sign.svg"}" ></img>
+                <img class="company-logo" src="${company_logo ? company_logo : "../images/question-sign.svg"}" ></img>
                         <div class="job-header-2">
                                 <a href="${url}" target="_blank" class="job-title">${title}</a>
                                 <a href="${company_url}" target="_blank" class="job-company">${company}</a>
@@ -106,7 +106,7 @@ function displayJobs() {
             acc += ` 
 
              <div class="job-header">
-                <img src="${company_logo ? company_logo : "/images/question-sign.svg"}" class="company-logo"></img>
+                <img src="${company_logo ? company_logo : "../images/question-sign.svg"}" class="company-logo"></img>
                             <div class="job-header-2">
                                 <a href="${url}" target="_blank" class="job-title">${position}</a>
                                 <a target="_blank" class="job-company">${company ? company : "No Company Info"}</a>
@@ -221,7 +221,7 @@ function displayWeWorkJobs() {
 
                         htmlWeWork += ` 
                <div class="job-header">
-                  <img src="${info.company_logo ? info.company_logo : '/images/question-sign.svg'}" class="company-logo"></img>
+                  <img src="${info.company_logo ? info.company_logo : '../images/question-sign.svg'}" class="company-logo"></img>
                               <div class="job-header-2">
                                   <a href="${info.siteUrl ? info.siteUrl : "No Info"}" target="_blank" class="job-title">${info.title}</a>
                                   <a target="_blank" class="job-company">${info.company ? info.company : "No Info"}</a>
@@ -256,7 +256,7 @@ function displayCodepenJobs() {
                         data[i].forEach(element => {
                             html += ` 
                     <div class="job-header">
-                        <img src="${element.company_logo ? element.company_logo : '/images/question-sign.svg'}" class="company-logo"></img>
+                        <img src="${element.company_logo ? element.company_logo : '../images/question-sign.svg'}" class="company-logo"></img>
                                     <div class="job-header-2">
                                         <a href="${element.url}" target="_blank" class="job-title">${element.title}</a>
                                         <a target="_blank" class="job-company">${element.company_name ? element.company_name : "No Company Info"}</a>
