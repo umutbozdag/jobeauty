@@ -1,0 +1,27 @@
+{
+  "name": "jobeauty",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "browser-sync": "^2.26.7",
+    "gulp-sass": "^4.0.2",
+    "gulp": "^4.0.2",
+    "node-sass": "^4.13.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/umutbozdag/jobeauty.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/umutbozdag/jobeauty/issues"
+  },
+  "homepage": "https://github.com/umutbozdag/jobeauty#readme"
+}

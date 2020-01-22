@@ -5,27 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="latest-jobs.css">
+    <title>Latest jobs</title>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/main.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-    <script src="app.js" async></script>
+    <script src="/js/jobs.js" async></script>
+
+
 </head>
 
 <body>
 
     <!-- Nav -->
     <nav id="navbar">
-        <div class="container">
+        <div class="container jobs-nav">
             <div class="row">
-                <div class="left">
-                    <a href="./index.html">jobeauty</a>
-                </div>
-                <div class="right">
-                    <a href="./latest-jobs.html">latest jobs</a>
-                    <a href="./about.html">about</a>
-                </div>
-
+                <a class="link" href="/index.html">jobeauty</a>
+                <a class="link" href="/pages/jobs.html">latest jobs</a>
+                <a class="link" href="/pages/about.html">about</a>
             </div>
         </div>
     </nav>
@@ -39,14 +39,11 @@
     <!-- Jobs listing section -->
 
     <section id="home-jobs">
-
         <div class="container">
-
             <div class="loader">Loading...</div>
             <div class="row">
                 <div class="column column-1">
                     <div class="job-list">
-
                         <div id="resultGithub"></div>
                         <div id="resultRemoteOk"></div>
                         <div id="resultCodepen"></div>
@@ -74,13 +71,6 @@
             </div>
         </div>
     </section>
-
-    <div id="menu" class="menu"><i class="fas fa-bars"></i></div>
-
-    <ul id="menu-items" class="menu-items">
-        <li><a href="">See all the jobs!</a> </li>
-        <li><a class="about" href="#">About</a></li>
-    </ul>
 </body>
 
 </html>

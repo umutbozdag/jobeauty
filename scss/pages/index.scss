@@ -1,0 +1,95 @@
+body {}
+
+.main-container {
+    background: #000099;
+    height: 100vh;
+}
+
+::selection {
+    background: yellow;
+    color: black;
+}
+
+
+#navbar {
+    .container {
+        padding: 24px 240px;
+
+        .row {
+            display: flex;
+            color: white;
+
+            a:first-child {
+                margin-right: auto;
+
+            }
+
+            a {
+                margin-right: 32px;
+                font-weight: 800;
+
+                &:hover {
+                    color: tomato;
+                    transition: all 0.25s;
+                }
+            }
+        }
+    }
+}
+
+
+header {
+
+    .container {
+        padding: 24px 240px;
+
+        .row {
+            .content {
+                color: white;
+                display: flex;
+                align-items: center;
+                height: 75vh;
+
+                .left {
+                    margin-right: auto;
+                    margin-bottom: 48px;
+
+                    h1 {
+                        font-size: 54px;
+                        margin-bottom: 32px;
+                    }
+
+                    p {
+                        font-size: 18px;
+                        margin-bottom: 32px;
+                    }
+
+                    a {
+                        display: flex;
+                        color: white;
+                        padding: 12px;
+                        text-decoration: none;
+                        font-size: 22px;
+                        transition: all 0.2s ease 0s;
+                        border: 2px solid #ffffff;
+                        font-weight: 800;
+                        border-radius: 4px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        margin-top: 24px;
+
+                        &:hover {
+                            background: #ec5439;
+                            border: 2px solid tomato;
+                        }
+
+                        i {
+                            margin-left: 12px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
